@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "DeepSeek Exporter",
+    "version": "1.0.0",
+    "description": "复制和导出DeepSeek对话记录为Markdown文件",
+    "permissions": [
+        "activeTab",
+        "clipboardWrite",
+        "downloads"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://chat.deepseek.com/*"
+            ],
+            "js": [
+                "content/index.js"
+            ],
+            "css": [
+                "content/style.css"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background/index.js"
+    },
+    "icons": {
+        "16": "icons/icon16.svg",
+        "48": "icons/icon48.svg",
+        "128": "icons/icon128.svg"
+    }
+}

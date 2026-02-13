@@ -1,0 +1,6 @@
+(function () {
+	'use strict';
+
+	chrome.runtime.onMessage.addListener((e,o,r)=>(console.log("[AI Exporter] 后台收到消息:",e.type),e.type==="DOWNLOAD_FILE"?(i(e.content,e.title,r),!0):(r({success:!1,error:"未知消息类型"}),!1)));function i(e,o,r){const s=new Date().toISOString().replace(/[-T:.]/g,"").slice(0,12);let t=(o||"conversation").replace(/[<>:"/\\|?*\x00-\x1f]/g,"_").trim()||"conversation";t=t.slice(0,80);const l=`${s}_${t}.md`;console.log("[AI Exporter] 下载文件:",l);const a=new Blob([e],{type:"text/markdown"}),n=URL.createObjectURL(a);chrome.downloads.download({url:n,filename:`AI Conversations/${l}`,saveAs:!1},c=>{chrome.runtime.lastError?(console.error("[AI Exporter] 下载失败:",chrome.runtime.lastError.message),m(n,r)):(console.log("[AI Exporter] 下载成功, ID:",c),r({success:!0}),URL.revokeObjectURL(n));});}function m(e,o){const s=`${new Date().toISOString().replace(/[-T:.]/g,"").slice(0,12)}_AI_Export.md`;chrome.downloads.download({url:e,filename:`AI Conversations/${s}`,saveAs:!1},t=>{chrome.runtime.lastError?(console.error("[AI Exporter] 重试下载失败:",chrome.runtime.lastError.message),o({success:!1,error:chrome.runtime.lastError.message})):(console.log("[AI Exporter] 重试下载成功, ID:",t),o({success:!0})),URL.revokeObjectURL(e);});}
+
+})();

@@ -1,9 +1,6 @@
 # 依赖
 node_modules/
 
-# 构建产物
-dist/
-
 # 日志
 *.log
 npm-debug.log*

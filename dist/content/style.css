@@ -1,0 +1,147 @@
+/* AI对话导出插件 - 样式 */
+/* 简洁风格：白色背景，小巧按钮 */
+
+/* 重置宿主页面样式污染 */
+#ai-exporter-buttons,
+.ai-exporter-btn {
+  all: initial;
+}
+
+/* 按钮容器 */
+#ai-exporter-buttons {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: 8px;
+  z-index: 2147483647;
+  font-family: system-ui, -apple-system, sans-serif;
+  vertical-align: middle;
+}
+
+/* 按钮样式 */
+.ai-exporter-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  z-index: 2147483647;
+  color: #666;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ai-exporter-btn:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+  color: #333;
+}
+
+.ai-exporter-btn:active {
+  transform: scale(0.95);
+}
+
+.ai-exporter-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-exporter-btn svg {
+  pointer-events: none;
+  display: block;
+}
+
+/* 导出菜单容器 */
+.ai-exporter-menu-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+/* 导出菜单 */
+.ai-exporter-menu {
+  position: fixed;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  padding: 4px 0;
+  min-width: 120px;
+  z-index: 2147483647;
+  display: none;
+}
+
+.ai-exporter-menu.show {
+  display: block;
+}
+
+.ai-exporter-menu-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.ai-exporter-menu-item:hover {
+  background: #f5f5f5;
+}
+
+/* Toast 提示样式 */
+.ai-exporter-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: system-ui, -apple-system, sans-serif;
+  z-index: 2147483647;
+  pointer-events: none;
+  animation: fadeInUp 0.2s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 暗黑模式适配 */
+@media (prefers-color-scheme: dark) {
+  .ai-exporter-btn {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #aaa;
+  }
+  
+  .ai-exporter-btn:hover {
+    background: #3a3a3a;
+    border-color: #555;
+    color: #ddd;
+  }
+  
+  .ai-exporter-menu {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+  
+  .ai-exporter-menu-item {
+    color: #ddd;
+  }
+  
+  .ai-exporter-menu-item:hover {
+    background: #3a3a3a;
+  }
+}
