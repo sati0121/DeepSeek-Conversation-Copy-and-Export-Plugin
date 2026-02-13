@@ -21,3 +21,7 @@ Thumbs.db
 # 临时文件
 *.tmp
 .env.local
+
+# 开发文档（本地文件）
+工作日志.md
+AI对话复制导出插件开发文档.md
