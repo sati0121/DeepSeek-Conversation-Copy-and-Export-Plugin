@@ -1,0 +1,16 @@
+{
+  "name": "deepseek-exporter",
+  "version": "1.0.0",
+  "description": "Chrome扩展 - 复制/导出DeepSeek对话为Markdown",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^4.5.0",
+    "vite-plugin-chrome-extension": "^0.0.7"
+  },
+  "author": "",
+  "license": "MIT"
+}

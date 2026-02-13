@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+
+# 日志
+*.log
+npm-debug.log*
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 临时文件
+*.tmp
+.env.local
