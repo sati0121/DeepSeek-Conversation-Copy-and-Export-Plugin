@@ -13,7 +13,35 @@
 
 ## 安装方法
 
-### 方法一：从源码构建（推荐）
+### 方法一：直接下载（推荐，无需构建）
+
+#### 1. 下载插件
+
+1. 点击 GitHub 页面的绿色 "Code" 按钮
+2. 选择 "Download ZIP"
+3. 解压文件
+
+或者直接下载 [dist 文件夹](./dist)（如果 GitHub 支持单独下载文件夹）
+
+#### 2. 加载到浏览器
+
+适用于 Chrome、Edge、Brave、Opera、Vivaldi、360、QQ浏览器、搜狗浏览器等基于 Chromium 内核的浏览器。
+
+**Chrome：**
+1. 在地址栏输入 `chrome://extensions/`
+2. 开启右上角的「开发者模式」
+3. 点击「加载已解压的扩展程序」
+4. 选择解压后的 `dist` 文件夹
+
+**Edge：**
+1. 在地址栏输入 `edge://extensions/`
+2. 开启左下角的「开发人员模式」
+3. 点击「加载解压缩的扩展」
+4. 选择解压后的 `dist` 文件夹
+
+---
+
+### 方法二：从源码构建
 
 #### 1. 安装 Node.js
 
@@ -28,45 +56,21 @@ node -v
 npm -v
 ```
 
-#### 2. 下载源码
+#### 2. 下载并构建
 
-**方式A：Git 克隆**
 ```bash
+# 克隆仓库
 git clone https://github.com/sati0121/DeepSeek-Conversation-Copy-and-Export-Plugin.git
 cd DeepSeek-Conversation-Copy-and-Export-Plugin
-```
 
-**方式B：直接下载**
-1. 点击 GitHub 页面的绿色 "Code" 按钮
-2. 选择 "Download ZIP"
-3. 解压到任意文件夹
-4. 打开命令行，进入该文件夹
-
-#### 3. 安装依赖并构建
-
-```bash
 # 安装依赖
 npm install
 
-# 构建插件
+# 构建
 npm run build
 ```
 
-构建完成后，会生成 `dist` 文件夹。
-
-#### 4. 加载到浏览器
-
-**Chrome：**
-1. 打开 `chrome://extensions/`
-2. 开启右上角的「开发者模式」
-3. 点击「加载已解压的扩展程序」
-4. 选择项目中的 `dist` 文件夹
-
-**Edge：**
-1. 打开 `edge://extensions/`
-2. 开启左下角的「开发人员模式」
-3. 点击「加载解压缩的扩展」
-4. 选择项目中的 `dist` 文件夹
+构建完成后，加载 `dist` 文件夹到浏览器即可。
 
 ---
 
@@ -147,6 +151,8 @@ AI 正在生成回复，等待完成后再点击按钮。
 | Edge | ✅ |
 | Brave | ✅ |
 | Opera | ✅ |
+| 360浏览器 | ✅ |
+| QQ浏览器 | ✅ |
 | Firefox | ❌ 需适配 |
 | Safari | ❌ 不支持 |
 
@@ -160,7 +166,7 @@ AI 正在生成回复，等待完成后再点击按钮。
 │   ├── background/  # 后台脚本
 │   ├── content/     # 内容脚本
 │   └── utils/       # 工具函数
-├── dist/            # 构建输出（加载这个文件夹）
+├── dist/            # 构建输出（可直接加载）
 ├── package.json
 └── vite.config.js
 ```
