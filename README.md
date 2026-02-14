@@ -1,6 +1,7 @@
 # DeepSeek Exporter
 
 一键保存 DeepSeek 对话记录，导出为 Markdown 文件。
+可以导出思考过程。
 
 ## 功能
 
