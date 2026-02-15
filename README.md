@@ -1,13 +1,13 @@
 # DeepSeek Exporter
 
-一键保存 DeepSeek 对话记录，导出为 Markdown 文件。
-可以导出思考过程。
+一键保存 DeepSeek 对话记录，导出为 Markdown 文件。支持导出思考过程和对话内文件。
 
 ## 功能
 
 - 📋 复制对话到剪贴板
 - 📁 导出为 Markdown 文件
 - 🧠 支持导出 AI 思考过程（DeepSeek 深度思考）
+- 📎 导出对话内文件（图片、PDF、代码文件等）
 - 🌐 支持 Chrome、Edge 等浏览器
 
 ---
@@ -42,21 +42,6 @@
 
 ### 方法二：从源码构建
 
-#### 1. 安装 Node.js
-
-如果电脑没有 Node.js：
-- 下载地址：https://nodejs.org/
-- 选择 LTS 版本下载安装
-- 安装完成后重启命令行
-
-验证安装：
-```bash
-node -v
-npm -v
-```
-
-#### 2. 下载并构建
-
 ```bash
 # 克隆仓库
 git clone https://github.com/sati0121/DeepSeek-Conversation-Copy-and-Export-Plugin.git
@@ -81,9 +66,10 @@ npm run build
 
 ### 2. 找到按钮
 
-在输入框附近会出现两个按钮：
+在输入框附近会出现三个按钮：
 - 📋 **复制按钮** - 复制对话到剪贴板
 - ⬇️ **导出按钮** - 导出为文件
+- 📎 **文件导出按钮** - 导出对话内文件
 
 ### 3. 导出对话
 
@@ -98,6 +84,27 @@ npm run build
    - **直接导出** - 仅 AI 回答
    - **导出思考过程** - 包含深度思考过程
 3. 文件自动下载到下载文件夹
+
+### 4. 导出对话内文件
+
+1. 点击文件导出按钮（📎）
+2. 在弹窗中勾选要导出的文件
+3. 点击"导出选中"按钮
+4. 等待下载完成
+
+---
+
+## 支持导出的文件类型
+
+| 文件类型 | 扩展名 | 支持 |
+|---------|--------|------|
+| 纯文本 | txt, md, csv, log | ✅ |
+| 代码文件 | js, ts, py, java, c, cpp, html, css, json 等 | ✅ |
+| 图片 | png, jpg, jpeg, gif, webp | ✅ |
+| PDF | pdf | ✅ 多页合并导出 |
+| Word | doc, docx | ❌ DeepSeek 不提供预览 |
+| Excel | xls, xlsx | ❌ DeepSeek 不提供预览 |
+| PowerPoint | ppt, pptx | ❌ DeepSeek 不提供预览 |
 
 ---
 
@@ -136,9 +143,9 @@ npm run build
 - 滚动到页面顶部，确保历史消息已加载
 - 等待 AI 回复完成后再导出
 
-### 提示"请等待 AI 回复完成"？
+### 文件显示"不支持导出"？
 
-AI 正在生成回复，等待完成后再点击按钮。
+DeepSeek 不提供该文件类型的预览功能，无法导出。目前不支持：Word、Excel、PowerPoint、压缩包、音视频文件。
 
 ---
 

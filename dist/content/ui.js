@@ -11,6 +11,7 @@
 
 import { detectPlatform } from '../utils/helpers';
 import { extractConversation } from './extractor';
+import { createFileExportButton } from '../utils/fileExportUI.js';
 
 /**
  * 创建按钮并插入到页面
@@ -38,10 +39,14 @@ export function createButtons() {
   const copyBtn = createButton('copy', platform);
   container.appendChild(copyBtn);
 
-  // DeepSeek 平台添加导出菜单
+  // DeepSeek 平台添加导出菜单和文件导出按钮
   if (platform === 'deepseek') {
     const exportWrapper = createExportMenu(platform);
     container.appendChild(exportWrapper);
+    
+    // 添加文件导出按钮
+    const fileExportBtn = createFileExportButton();
+    container.appendChild(fileExportBtn);
   } else {
     const exportBtn = createButton('export', platform);
     container.appendChild(exportBtn);

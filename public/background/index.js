@@ -16,6 +16,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // 异步响应
   }
   
+  if (request.type === 'DOWNLOAD_FILE_WITH_NAME') {
+    handleFileDownload(request.url, request.filename, sendResponse);
+    return true; // 异步响应
+  }
+  
   sendResponse({ success: false, error: '未知消息类型' });
   return false;
 });
@@ -77,5 +82,35 @@ function retryDownload(url, sendResponse) {
       sendResponse({ success: true });
     }
     URL.revokeObjectURL(url);
+  });
+}
+
+/**
+ * 处理单个文件下载（用于文件导出功能）
+ * @param {string} url - 文件 URL
+ * @param {string} filename - 文件名
+ * @param {Function} sendResponse - 响应回调
+ */
+function handleFileDownload(url, filename, sendResponse) {
+  // 清理文件名
+  const safeFilename = filename
+    .replace(/[<>:"/\\|?*\x00-\x1f]/g, '_')
+    .trim()
+    .substring(0, 200);
+  
+  console.log('[AI Exporter] 下载文件:', safeFilename);
+  
+  chrome.downloads.download({
+    url,
+    filename: `AI Files/${safeFilename}`,
+    saveAs: false
+  }, (downloadId) => {
+    if (chrome.runtime.lastError) {
+      console.error('[AI Exporter] 文件下载失败:', chrome.runtime.lastError.message);
+      sendResponse({ success: false, error: chrome.runtime.lastError.message });
+    } else {
+      console.log('[AI Exporter] 文件下载成功, ID:', downloadId);
+      sendResponse({ success: true, downloadId });
+    }
   });
 }

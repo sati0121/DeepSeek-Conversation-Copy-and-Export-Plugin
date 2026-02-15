@@ -12,5 +12,8 @@
     "vite-plugin-chrome-extension": "^0.0.7"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  }
 }

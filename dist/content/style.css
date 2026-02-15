@@ -1,5 +1,5 @@
 /* AI对话导出插件 - 样式 */
-/* 简洁风格：白色背景，小巧按钮 */
+/* 模仿 DeepSeek 原生按钮风格 */
 
 /* 重置宿主页面样式污染 */
 #ai-exporter-buttons,
@@ -10,48 +10,65 @@
 /* 按钮容器 */
 #ai-exporter-buttons {
   display: inline-flex;
-  gap: 6px;
+  gap: 8px;
   margin-left: 8px;
   z-index: 2147483647;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   vertical-align: middle;
 }
 
-/* 按钮样式 */
+/* 按钮样式 - 模仿 DeepSeek ds-icon-button */
 .ai-exporter-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  border: 1px solid #e0e0e0;
-  background: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease;
   z-index: 2147483647;
   color: #666;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: relative;
 }
 
 .ai-exporter-btn:hover {
-  background: #f5f5f5;
-  border-color: #ccc;
+  background: rgba(0, 0, 0, 0.05);
   color: #333;
 }
 
 .ai-exporter-btn:active {
-  transform: scale(0.95);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .ai-exporter-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .ai-exporter-btn svg {
   pointer-events: none;
   display: block;
+  width: 18px;
+  height: 18px;
+}
+
+/* 暗黑模式适配 */
+@media (prefers-color-scheme: dark) {
+  .ai-exporter-btn {
+    color: #999;
+  }
+  
+  .ai-exporter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+  }
+  
+  .ai-exporter-btn:active {
+    background: rgba(255, 255, 255, 0.15);
+  }
 }
 
 /* 导出菜单容器 */
@@ -64,11 +81,10 @@
 .ai-exporter-menu {
   position: fixed;
   background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  padding: 4px 0;
-  min-width: 120px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  min-width: 140px;
   z-index: 2147483647;
   display: none;
 }
@@ -78,12 +94,13 @@
 }
 
 .ai-exporter-menu-item {
-  padding: 8px 12px;
-  font-size: 13px;
+  padding: 10px 14px;
+  font-size: 14px;
   color: #333;
   cursor: pointer;
   transition: background 0.15s;
   white-space: nowrap;
+  border-radius: 8px;
 }
 
 .ai-exporter-menu-item:hover {
@@ -98,10 +115,10 @@
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-family: system-ui, -apple-system, sans-serif;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   z-index: 2147483647;
   pointer-events: none;
   animation: fadeInUp 0.2s ease;
@@ -118,23 +135,11 @@
   }
 }
 
-/* 暗黑模式适配 */
+/* 暗黑模式 - 菜单和 Toast */
 @media (prefers-color-scheme: dark) {
-  .ai-exporter-btn {
-    background: #2a2a2a;
-    border-color: #444;
-    color: #aaa;
-  }
-  
-  .ai-exporter-btn:hover {
-    background: #3a3a3a;
-    border-color: #555;
-    color: #ddd;
-  }
-  
   .ai-exporter-menu {
     background: #2a2a2a;
-    border-color: #444;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   }
   
   .ai-exporter-menu-item {
@@ -143,5 +148,414 @@
   
   .ai-exporter-menu-item:hover {
     background: #3a3a3a;
+  }
+}
+
+/* ========== 文件导出弹窗样式 ========== */
+
+/* 弹窗遮罩 */
+.file-export-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 弹窗内容 */
+.file-export-modal-content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 弹窗头部 */
+.file-export-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.file-export-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.file-export-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-export-close:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* 弹窗主体 */
+.file-export-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 加载状态 */
+.file-export-loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* 空状态 */
+.file-export-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.file-export-empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.file-export-empty p {
+  margin: 8px 0;
+}
+
+.file-export-empty-hint {
+  font-size: 13px;
+  color: #bbb;
+}
+
+/* 工具栏 */
+.file-export-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.file-export-select-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+}
+
+.file-export-select-all input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.file-export-count {
+  font-size: 13px;
+  color: #999;
+}
+
+/* 文件列表 */
+.file-export-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 筛选标签栏 */
+.file-export-filter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.file-export-filter-tab {
+  padding: 6px 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  background: #fff;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.file-export-filter-tab:hover {
+  border-color: #4a6cf7;
+  color: #4a6cf7;
+}
+
+.file-export-filter-tab.active {
+  background: #4a6cf7;
+  border-color: #4a6cf7;
+  color: #fff;
+}
+
+.file-export-filter-tab .filter-count {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.file-export-filter-tab.active .filter-count {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 文件项 */
+.file-export-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.file-export-item:hover {
+  background: #fafafa;
+  border-color: #e8e8e8;
+}
+
+/* 不支持导出的文件项 */
+.file-export-item-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #fafafa;
+}
+
+.file-export-item-disabled:hover {
+  background: #fafafa;
+  border-color: #f0f0f0;
+}
+
+.file-export-item-disabled .file-checkbox {
+  cursor: not-allowed;
+}
+
+.file-export-item-disabled .file-name {
+  color: #999;
+}
+
+.file-export-item .file-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.file-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
+.file-type {
+  text-transform: uppercase;
+}
+
+/* 弹窗底部 */
+.file-export-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.file-export-cancel,
+.file-export-download {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.file-export-cancel {
+  background: #f5f5f5;
+  border: none;
+  color: #666;
+}
+
+.file-export-cancel:hover {
+  background: #eee;
+}
+
+.file-export-download {
+  background: #4a6cf7;
+  border: none;
+  color: #fff;
+}
+
+.file-export-download:hover:not(:disabled) {
+  background: #3a5ce5;
+}
+
+.file-export-download:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* 暗黑模式 - 文件导出弹窗 */
+@media (prefers-color-scheme: dark) {
+  .file-export-modal-content {
+    background: #1e1e1e;
+  }
+  
+  .file-export-header {
+    border-bottom-color: #333;
+  }
+  
+  .file-export-header h3 {
+    color: #e0e0e0;
+  }
+  
+  .file-export-close {
+    color: #888;
+  }
+  
+  .file-export-close:hover {
+    background: #333;
+    color: #e0e0e0;
+  }
+  
+  .file-export-loading,
+  .file-export-empty {
+    color: #888;
+  }
+  
+  .file-export-empty-hint {
+    color: #555;
+  }
+  
+  .file-export-toolbar {
+    border-bottom-color: #333;
+  }
+  
+  .file-export-select-all {
+    color: #aaa;
+  }
+  
+  .file-export-count {
+    color: #666;
+  }
+  
+  .file-export-filter-tab {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #aaa;
+  }
+  
+  .file-export-filter-tab:hover {
+    border-color: #4a6cf7;
+    color: #4a6cf7;
+  }
+  
+  .file-export-filter-tab.active {
+    background: #4a6cf7;
+    border-color: #4a6cf7;
+    color: #fff;
+  }
+  
+  .file-export-filter-tab .filter-count {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .file-export-filter-tab.active .filter-count {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .file-export-item {
+    border-color: #333;
+    background: #252525;
+  }
+  
+  .file-export-item:hover {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+  
+  .file-name {
+    color: #e0e0e0;
+  }
+  
+  .file-meta {
+    color: #888;
+  }
+  
+  .file-export-footer {
+    border-top-color: #333;
+  }
+  
+  .file-export-cancel {
+    background: #333;
+    color: #aaa;
+  }
+  
+  .file-export-cancel:hover {
+    background: #3a3a3a;
+  }
+  
+  .file-export-download {
+    background: #4a6cf7;
+  }
+  
+  .file-export-download:hover:not(:disabled) {
+    background: #5a7cf7;
   }
 }
